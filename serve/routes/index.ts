@@ -1,9 +1,9 @@
 import Router from "koa-router";
+import * as Koa from "koa"
+const {dummy}=require('../controllers/dummy.controllers')
 const router=new Router();
 
-router.get("/", async (ctx, next)=>{
-    ctx.body={msg:"Hello World"};
-    await next();
-});
+router.get("/", dummy);
+
 
 module.exports = { router };

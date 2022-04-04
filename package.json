@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.1",
+    "@types/koa": "^2.13.4",
+    "@vue/test-utils": "^2.0.0-rc.17"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}

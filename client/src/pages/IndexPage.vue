@@ -6,15 +6,20 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
-    <DummyFetch active />
+    <DummyFetch
+      active
+      :message="message"
+      :backend="backend"
+    />
   </q-page>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
+import { Todo, Meta, Details } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
 import DummyFetch from 'components/dummyFetch.vue';
 import { defineComponent, ref } from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -45,7 +50,31 @@ export default defineComponent({
     const meta = ref<Meta>({
       totalCount: 1200,
     });
-    return { todos, meta };
+    const details = ref<Details>({
+      name: '',
+      type: 'bucket',
+      url: 'https://foaas.com',
+    });
+    let message = ref('');
+    let backend = ref('');
+    return { todos, meta, details, message, backend };
+  },
+  async mounted() {
+    this.backend = await this.fetchFromBackend();
+    this.details.name = this.backend;
+    this.message = await this.fuckOff(this.details);
+
+    console.log(this.backend);
+  },
+  methods: {
+    async fuckOff(details: Details) {
+      const res = await axios(`${details.url}/${details.type}/${details.name}`);
+      return `${res.data.message} ${res.data.subtitle}`;
+    },
+    async fetchFromBackend() {
+      const res = await axios('http://localhost:3500/');
+      return res.data;
+    },
   },
 });
 </script>
