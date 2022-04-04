@@ -6,7 +6,7 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
-    <DummyFetch />
+    <DummyFetch active />
   </q-page>
 </template>
 
